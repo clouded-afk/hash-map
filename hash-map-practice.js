@@ -29,7 +29,17 @@ class HashMap {
 
     // takes one argument as a kay and returns the value that is assigned to this key, if key is not found, return null
     get(key) {
+        let index = this.hash(key);
 
+        if (!this.buckets[index]) {
+            return null;
+        }
+
+        for (let bucket of this.buckets[index]) {
+            if(bucket[0] === key) {
+                return bucket[1]
+            }
+        }
     }
 
     // takes a key as an argument and returns TRUE or FALSE based on whether or not the key is in the hash map
