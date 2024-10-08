@@ -1,5 +1,7 @@
 class HashMap {
-    constructor() {
+    constructor(size = 16) {
+        this.buckets = new Array(size);
+        this.size = size;
     }
 
     // takes a key and produces a hash code
@@ -11,15 +13,21 @@ class HashMap {
             hashCode = primeNumber * hashCode + key.charCodeAt(i);
         }
 
-        return hashCode
+        return hashCode % this.size
     }
 
     // takes 2 arguments, first is the key, second is the value assigned to that key. If the key already exist, it shouuld update the key's value with the new value.
     set(key, value) {
+        let index = this.hash(key);
 
+        if(!this.buckets[index]) {
+            this.buckets[index] = [];
+        }
+
+        this.buckets[index].push([key, value]);
     }
 
-    // takes one argument as a kay and returns the vlaue that is assigned to this key, if key is not found, return null
+    // takes one argument as a kay and returns the value that is assigned to this key, if key is not found, return null
     get(key) {
 
     }
