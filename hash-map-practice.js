@@ -1,11 +1,8 @@
 class HashMap {
-    constructor(initialSize = 16, initialLoadFactor = 0.75) {
-        this.buckets = new Array(initialSize)
-        this.loadFactor = initialLoadFactor
-        this.size = this.buckets.length
+    constructor() {
     }
 
-    // Takes a key and produces a hash code
+    // takes a key and produces a hash code
     hash(key) {
         let hashCode = 0;
 
@@ -14,6 +11,51 @@ class HashMap {
             hashCode = primeNumber * hashCode + key.charCodeAt(i);
         }
 
-        return hashCode % this.size;
+        return hashCode
+    }
+
+    // takes 2 arguments, first is the key, second is the value assigned to that key. If the key already exist, it shouuld update the key's value with the new value.
+    set(key, value) {
+
+    }
+
+    // takes one argument as a kay and returns the vlaue that is assigned to this key, if key is not found, return null
+    get(key) {
+
+    }
+
+    // takes a key as an argument and returns TRUE or FALSE based on whether or not the key is in the hash map
+    has(key) {
+
+    }
+
+    // takes a key as an arguemnt. If the fiven key is in the hash map, it should remove the tentry with that key and return TRUE. If the key isnt in the hash map it should return FALSE
+    remove(key) {
+
+    }
+
+    // return the number of keys stored in the hash map
+    length() {
+
+    }
+
+    // reomves all entries from the hash map
+    clear() {
+
+    }
+
+    // returns an array containing all the keys inside the hash map
+    keys() {
+
+    }
+
+    // returns an array containing all the values
+    values() {
+
+    }
+
+    // returns an array that contains each key, value pair. Example : [[firstKey, firstValue], [secondKey, secondValue]]
+    entries() {
+
     }
 }
