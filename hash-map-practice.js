@@ -47,7 +47,14 @@ class HashMap {
 
     // takes a key as an argument and returns TRUE or FALSE based on whether or not the key is in the hash map
     has(key) {
+        let index = this.hash(key)
 
+        for (let i = 0; i < this.buckets[index].length; i++) {
+            if (this.buckets[index][0] === key) {
+                return true
+            }
+            return false
+        }
     }
 
     // takes a key as an arguemnt. If the fiven key is in the hash map, it should remove the tentry with that key and return TRUE. If the key isnt in the hash map it should return FALSE
@@ -88,4 +95,7 @@ test.set('banana', 'yellow')
 test.set('carrot', 'orange')
 test.set('dog', 'brown')
 test.set('apple', 'green')
+
+console.log(test.has('banana'))
+console.log(test.get('apple'))
 
