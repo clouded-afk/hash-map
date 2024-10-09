@@ -1,6 +1,6 @@
 class HashMap {
     constructor(size = 16) {
-        this.buckets = new Array(size)
+        this.buckets = new Array(size).fill(null)
         this.size = size
         this.numOfEntries = 0
     }
@@ -114,14 +114,10 @@ test.set('lion', 'golden')
 
 console.log(test.has('grape'))
 console.log(test.get('apple'))
-console.log(test.remove('apple'))
-
-
 
 console.log(JSON.stringify(test.entries()))
 
 console.log(`Total Number Of Entries: ${test.numOfEntries}`)
 console.log(`Hash Map Size: ${test.size}`)
 console.log(`Load Factor: ${test.numOfEntries/test.size}`)
-
 
