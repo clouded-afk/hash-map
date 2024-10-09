@@ -2,6 +2,7 @@ class HashMap {
     constructor(size = 16) {
         this.buckets = new Array(size)
         this.size = size
+        this.numOfEntries = 0
     }
 
     // takes a key and produces a hash code
@@ -30,6 +31,7 @@ class HashMap {
         }
 
         this.buckets[index].push(key, value)
+        this.numOfEntries++
     }
 
     // takes one argument as a kay and returns the value that is assigned to this key, if key is not found, return null
@@ -61,15 +63,7 @@ class HashMap {
 
     // takes a key as an arguemnt. If the given key is in the hash map, it should remove the entry with that key and return TRUE. If the key isnt in the hash map it should return FALSE
     remove(key) {
-        let index = this.hash(key)
 
-        for (let i = 0; i < this.buckets[index].length; i++) {
-            if (this.buckets[index][0] === key) {
-                this.buckets[index] = []
-                return true
-            }
-        }
-        return false
     }
 
     // return the number of keys stored in the hash map
@@ -117,11 +111,17 @@ test.set('ice cream', 'white')
 test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
-test.set('apple', 'green')
 
-console.log(test.has('banana'))
+console.log(test.has('grape'))
 console.log(test.get('apple'))
+console.log(test.remove('apple'))
+
 
 
 console.log(JSON.stringify(test.entries()))
+
+console.log(`Total Number Of Entries: ${test.numOfEntries}`)
+console.log(`Hash Map Size: ${test.size}`)
+console.log(`Load Factor: ${test.numOfEntries/test.size}`)
+
 
