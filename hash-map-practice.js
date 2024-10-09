@@ -23,13 +23,15 @@ class HashMap {
 
         if (!this.buckets[index]) {
             this.buckets[index] = [[key, value]]
+            this.numOfEntries++
         } else {
-            if (this.buckets[index][0] === key) {
-                this.buckets[index][1] = value
+            const sameKeyItem = this.buckets[index].find(item => item[0] === key)
+            if (sameKeyItem) {
+                sameKeyItem[1] = value
             } else {
                 this.buckets[index].push([key, value])
+                this.numOfEntries++
             }
-            this.numOfEntries++
         }
     }
 
@@ -37,15 +39,13 @@ class HashMap {
     get(key) {
         let index = this.hash(key)
 
-        if (!this.buckets[index]) {
-            return null
-        }
-
-        for (let i = 0; i < this.buckets[index].length; i++) {
-            if (this.buckets[index][0] === key) {
-                return this.buckets[index][1]
+        if (this.buckets[index]) {
+            const sameKeyItem = this.buckets[index].find(item => item[0] === key)
+            if (sameKeyItem) {
+                return sameKeyItem[1]
             }
         }
+        return null
     }
 
     // takes a key as an argument and returns TRUE or FALSE based on whether or not the key is in the hash map
@@ -136,9 +136,10 @@ test.set('ice cream', 'white')
 test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
+test.set('apple', 'green')
 
+console.log(test.get('hat'))
 console.log(test.has('grape'))
-console.log(test.get('apple'))
 
 console.log(JSON.stringify(test.entries()))
 
