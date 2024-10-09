@@ -93,24 +93,29 @@ class HashMap {
     // returns an array containing all the keys inside the hash map
     keys() {
         let keys = []
-        for (let i = 0; i < this.size; i++) {
-            if (this.buckets[i] !== null) {
-                keys.push(this.buckets[i][0])
+        this.buckets.forEach(bucket => {
+            if (bucket) {
+                bucket.forEach(item => {
+                    keys.push(item[0])
+                })
             }
-        }
+        })
         return keys
     }
 
     // returns an array containing all the values
     values() {
         let values = []
-        for (let i = 0; i < this.size; i++) {
-            if (this.buckets[i] !== null) {
-                values.push(this.buckets[i][1])
+        this.buckets.forEach(bucket => {
+            if (bucket) {
+                bucket.forEach(item => {
+                    values.push(item[1])
+                })
             }
-        }
+        })
         return values
     }
+
 
     // returns an array that contains each key, value pair. Example : [[firstKey, firstValue], [secondKey, secondValue]]
     entries() {
