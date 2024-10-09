@@ -63,7 +63,16 @@ class HashMap {
 
     // takes a key as an arguemnt. If the given key is in the hash map, it should remove the entry with that key and return TRUE. If the key isnt in the hash map it should return FALSE
     remove(key) {
+        let index = this.hash(key)
 
+        for (let i = 0; i < this.buckets[index].length; i++) {
+            if (this.buckets[index][0] === key) {
+                this.buckets[index] = null
+                this.numOfEntries--
+                return true
+            }
+        }
+        return false
     }
 
     // return the number of keys stored in the hash map
