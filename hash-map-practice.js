@@ -23,11 +23,12 @@ class HashMap {
         if (!this.buckets[index]) {
             this.buckets[index] = []
         }
-        this.buckets[index].push(key, value)
 
         if (this.buckets[index][0] === key) {
             this.buckets[index][1] = value
         }
+
+        this.buckets[index].push(key, value)
     }
 
     // takes one argument as a kay and returns the value that is assigned to this key, if key is not found, return null
@@ -57,7 +58,7 @@ class HashMap {
         }
     }
 
-    // takes a key as an arguemnt. If the fiven key is in the hash map, it should remove the tentry with that key and return TRUE. If the key isnt in the hash map it should return FALSE
+    // takes a key as an arguemnt. If the given key is in the hash map, it should remove the entry with that key and return TRUE. If the key isnt in the hash map it should return FALSE
     remove(key) {
 
     }
@@ -84,7 +85,12 @@ class HashMap {
 
     // returns an array that contains each key, value pair. Example : [[firstKey, firstValue], [secondKey, secondValue]]
     entries() {
+        let entries = []
 
+        this.buckets.forEach((bucket) => {
+            entries.push(bucket)
+        })
+        return entries
     }
 }
 
@@ -94,8 +100,10 @@ test.set('apple', 'red')
 test.set('banana', 'yellow')
 test.set('carrot', 'orange')
 test.set('dog', 'brown')
-test.set('apple', 'green')
+
 
 console.log(test.has('banana'))
 console.log(test.get('apple'))
 
+
+console.log(JSON.stringify(test.entries()))
