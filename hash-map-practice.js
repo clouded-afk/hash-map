@@ -26,6 +26,7 @@ class HashMap {
 
         if (this.buckets[index][0] === key) {
             this.buckets[index][1] = value
+            return
         }
 
         this.buckets[index].push(key, value)
@@ -60,7 +61,15 @@ class HashMap {
 
     // takes a key as an arguemnt. If the given key is in the hash map, it should remove the entry with that key and return TRUE. If the key isnt in the hash map it should return FALSE
     remove(key) {
+        let index = this.hash(key)
 
+        for (let i = 0; i < this.buckets[index].length; i++) {
+            if (this.buckets[index][0] === key) {
+                this.buckets[index] = []
+                return true
+            }
+        }
+        return false
     }
 
     // return the number of keys stored in the hash map
@@ -100,10 +109,19 @@ test.set('apple', 'red')
 test.set('banana', 'yellow')
 test.set('carrot', 'orange')
 test.set('dog', 'brown')
-
+test.set('elephant', 'gray')
+test.set('frog', 'green')
+test.set('grape', 'purple')
+test.set('hat', 'black')
+test.set('ice cream', 'white')
+test.set('jacket', 'blue')
+test.set('kite', 'pink')
+test.set('lion', 'golden')
+test.set('apple', 'green')
 
 console.log(test.has('banana'))
 console.log(test.get('apple'))
 
 
 console.log(JSON.stringify(test.entries()))
+
