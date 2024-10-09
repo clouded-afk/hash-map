@@ -53,7 +53,8 @@ class HashMap {
         let index = this.hash(key)
 
         for (let i = 0; i < this.buckets[index].length; i++) {
-            if (this.buckets[index][0] === key) {
+            const sameKeyItem = this.buckets[index].find(item => item[0] === key)
+            if (sameKeyItem) {
                 return true
             }
             return false
@@ -139,7 +140,7 @@ test.set('lion', 'golden')
 test.set('apple', 'green')
 
 console.log(test.get('hat'))
-console.log(test.has('grape'))
+console.log(test.has('lion'))
 
 console.log(JSON.stringify(test.entries()))
 
