@@ -22,16 +22,15 @@ class HashMap {
         let index = this.hash(key)
 
         if (!this.buckets[index]) {
-            this.buckets[index] = []
+            this.buckets[index] = [[key, value]]
+        } else {
+            if (this.buckets[index][0] === key) {
+                this.buckets[index][1] = value
+            } else {
+                this.buckets[index].push([key, value])
+            }
+            this.numOfEntries++
         }
-
-        if (this.buckets[index][0] === key) {
-            this.buckets[index][1] = value
-            return
-        }
-
-        this.buckets[index].push(key, value)
-        this.numOfEntries++
     }
 
     // takes one argument as a kay and returns the value that is assigned to this key, if key is not found, return null
@@ -140,7 +139,6 @@ test.set('lion', 'golden')
 
 console.log(test.has('grape'))
 console.log(test.get('apple'))
-console.log(test.remove('banana'))
 
 console.log(JSON.stringify(test.entries()))
 
