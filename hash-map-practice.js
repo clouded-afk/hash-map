@@ -23,15 +23,11 @@ class HashMap {
         if (!this.buckets[index]) {
             this.buckets[index] = []
         }
+        this.buckets[index].push(key, value)
 
-        for (let i = 0; i < this.buckets[index].length; i++) {
-            if (this.buckets[index][i][0] === key) {
-                this.buckets[index][i][1] = value
-                return
-            }
+        if (this.buckets[index][0] === key) {
+            this.buckets[index][1] = value
         }
-
-        this.buckets[index].push([key, value])
     }
 
     // takes one argument as a kay and returns the value that is assigned to this key, if key is not found, return null
@@ -41,10 +37,10 @@ class HashMap {
         if (!this.buckets[index]) {
             return null
         }
-        
-        for (let bucket of this.buckets[index]) {
-            if (bucket[0] === key) {
-                return bucket[1]
+
+        for (let i = 0; i < this.buckets[index].length; i++) {
+            if (this.buckets[index][0] === key) {
+                return this.buckets[index][1]
             }
         }
     }
@@ -91,8 +87,5 @@ test.set('apple', 'red')
 test.set('banana', 'yellow')
 test.set('carrot', 'orange')
 test.set('dog', 'brown')
+test.set('apple', 'green')
 
-test.set('dog', 'black')
-
-
-console.log(test.get('dog'))
