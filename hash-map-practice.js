@@ -24,6 +24,13 @@ class HashMap {
             this.buckets[index] = []
         }
 
+        for (let i = 0; i < this.buckets[index].length; i++) {
+            if (this.buckets[index][i][0] === key) {
+                this.buckets[index][i][1] = value
+                return
+            }
+        }
+
         this.buckets[index].push([key, value])
     }
 
@@ -84,6 +91,8 @@ test.set('apple', 'red')
 test.set('banana', 'yellow')
 test.set('carrot', 'orange')
 test.set('dog', 'brown')
+
+test.set('dog', 'black')
 
 
 console.log(test.get('dog'))
