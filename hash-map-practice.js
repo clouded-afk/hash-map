@@ -65,10 +65,10 @@ class HashMap {
     remove(key) {
         let index = this.hash(key)
 
-        for (let i = 0; i < this.buckets[index].length; i++) {
-            if (this.buckets[index][0] === key) {
-                this.buckets[index] = null
-                this.numOfEntries--
+        if (this.buckets[index]) {
+            const sameKeyItem = this.buckets[index].find(item => item[0] === key)
+            if (sameKeyItem) {
+                this.buckets[index].splice(this.buckets[index].indexOf(sameKeyItem), 1)
                 return true
             }
         }
