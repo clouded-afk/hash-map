@@ -77,12 +77,17 @@ class HashMap {
 
     // return the number of keys stored in the hash map
     length() {
-
+        return this.numOfEntries
     }
 
     // reomves all entries from the hash map
     clear() {
-
+        for (let i = 0; i < this.size; i++) {
+            if (this.buckets[i] !== null) {
+                this.buckets[i] = null
+                this.numOfEntries = 0
+            }
+        }
     }
 
     // returns an array containing all the keys inside the hash map
@@ -126,7 +131,15 @@ console.log(test.get('apple'))
 
 console.log(JSON.stringify(test.entries()))
 
-console.log(`Total Number Of Entries: ${test.numOfEntries}`)
+console.log(`Total Number Of Entries: ${test.length()}`)
 console.log(`Hash Map Size: ${test.size}`)
 console.log(`Load Factor: ${test.numOfEntries/test.size}`)
 
+console.log('')
+console.log('----- Testing Clear Function to ensure the hash map is empty-----')
+test.clear()
+console.log(JSON.stringify(test.entries()))
+
+console.log(`Total Number Of Entries: ${test.length()}`)
+console.log(`Hash Map Size: ${test.size}`)
+console.log(`Load Factor: ${test.numOfEntries/test.size}`)
