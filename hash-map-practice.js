@@ -3,7 +3,6 @@ class HashMap {
         this.buckets = new Array(size).fill(null)
         this.size = size
         this.numOfEntries = 0
-        this.loadFactor = this.numOfEntries / this.size
     }
 
     resize() {
@@ -16,8 +15,9 @@ class HashMap {
                     const index = this.hash(key)
                     if (!newBuckets[index]) {
                         newBuckets[index] = [[key, value]]
-                    } 
-                    newBuckets[index].push([key, value])
+                    } else {
+                        newBuckets[index].push([key, value])
+                    }
                  })
             }
         })
@@ -52,11 +52,11 @@ class HashMap {
                 this.numOfEntries++
             }
         }
-        this.loadFactor = this.numOfEntries/this.size
+        let loadFactor = this.numOfEntries/this.size
+        
 
-        if (this.loadFactor > 0.75) {
+        if (loadFactor > 0.75) {
             this.resize()
-            this.loadFactor = this.numOfEntries/this.size
         }
     }
 
@@ -94,6 +94,7 @@ class HashMap {
             const sameKeyItem = this.buckets[index].find(item => item[0] === key)
             if (sameKeyItem) {
                 this.buckets[index].splice(this.buckets[index].indexOf(sameKeyItem), 1)
+                this.numOfEntries--
                 return true
             }
         }
@@ -185,7 +186,7 @@ console.log('----- Testing Resize -----')
 console.log(JSON.stringify(test.entries()))
 console.log(`Total Number Of Entries: ${test.length()}`)
 console.log(`Hash Map Size: ${test.size}`)
-console.log(`Load Factor: ${test.loadFactor}`)
+console.log(`Load Factor: ${test.numOfEntries/test.size}`)
 console.log(`Keys: ${JSON.stringify(test.keys())}`)
 console.log(`Values: ${JSON.stringify(test.values())}`)
 
