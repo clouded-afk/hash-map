@@ -168,10 +168,10 @@ test.set('ice cream', 'white')
 test.set('jacket', 'blue')
 test.set('kite', 'pink')
 test.set('lion', 'golden')
-test.set('apple', 'green')
 
 console.log(test.get('hat'))
 console.log(test.has('lion'))
+
 
 console.log(JSON.stringify(test.entries()))
 console.log(`Total Number Of Entries: ${test.length()}`)
@@ -180,7 +180,12 @@ console.log(`Load Factor: ${test.numOfEntries/test.size}`)
 console.log(`Keys: ${JSON.stringify(test.keys())}`)
 console.log(`Values: ${JSON.stringify(test.values())}`)
 
+// Tests resize function
 test.set('moon', 'silver')
+
+// Tests to ensure the value is update if the key already exists, rather than adding in a new key value pair
+test.set('apple', 'green')
+
 console.log('')
 console.log('----- Testing Resize -----')
 console.log(JSON.stringify(test.entries()))
