@@ -3,6 +3,25 @@ class HashMap {
         this.buckets = new Array(size).fill(null)
         this.size = size
         this.numOfEntries = 0
+        this.loadFactor = this.numOfEntries / this.size
+    }
+
+    resize() {
+        const newBuckets = new Array(this.size * 2).fill(null)
+        this.size = newBuckets.length
+        
+        this.buckets.forEach(item => {
+            if (item) {
+                item.forEach(([key, value]) => {
+                    const index = this.hash(key)
+                    if (!newBuckets[index]) {
+                        newBuckets[index] = [[key, value]]
+                    } 
+                    newBuckets[index].push([key, value])
+                 })
+            }
+        })
+        this.buckets = newBuckets
     }
 
     // takes a key and produces a hash code
@@ -32,6 +51,12 @@ class HashMap {
                 this.buckets[index].push([key, value])
                 this.numOfEntries++
             }
+        }
+        this.loadFactor = this.numOfEntries/this.size
+
+        if (this.loadFactor > 0.75) {
+            this.resize()
+            this.loadFactor = this.numOfEntries/this.size
         }
     }
 
@@ -148,13 +173,21 @@ console.log(test.get('hat'))
 console.log(test.has('lion'))
 
 console.log(JSON.stringify(test.entries()))
-
 console.log(`Total Number Of Entries: ${test.length()}`)
 console.log(`Hash Map Size: ${test.size}`)
 console.log(`Load Factor: ${test.numOfEntries/test.size}`)
 console.log(`Keys: ${JSON.stringify(test.keys())}`)
 console.log(`Values: ${JSON.stringify(test.values())}`)
 
+test.set('moon', 'silver')
+console.log('')
+console.log('----- Testing Resize -----')
+console.log(JSON.stringify(test.entries()))
+console.log(`Total Number Of Entries: ${test.length()}`)
+console.log(`Hash Map Size: ${test.size}`)
+console.log(`Load Factor: ${test.loadFactor}`)
+console.log(`Keys: ${JSON.stringify(test.keys())}`)
+console.log(`Values: ${JSON.stringify(test.values())}`)
 
 console.log('')
 console.log('----- Testing Clear Function to ensure the hash map is empty-----')
